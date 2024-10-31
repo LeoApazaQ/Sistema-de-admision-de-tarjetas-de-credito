@@ -52,19 +52,19 @@
             <input type="number" class="form-control" id="antiguedad" name="antiguedad" required>
         </div>
 
-        <div class="form-group">
+{{--         <div class="form-group">
             <label for="tipo_tarjeta">Tipo de Tarjeta</label>
             <select class="form-control" id="tipo_tarjeta" name="tipo_tarjeta">
                 <option value="credito">Crédito</option>
                 <option value="debito">Débito</option>
             </select>
-        </div>
+        </div> --}}
 
-        <div class="form-group">
+{{--         <div class="form-group">
             <label for="documentos">Documentación Requerida</label>
             <input type="file" class="form-control-file" id="documentos" name="documentos[]" multiple required>
         </div>
-
+ --}}
         <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
         <a href="{{-- {{ route('solicitudes.index') }} --}}" class="btn btn-secondary">Cancelar</a>
     </form>
