@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('request_actions', function (Blueprint $table) {
             $table->id();
+            $table->string('action_type');
             //clave foranea a requests
             $table->unsignedBigInteger('request_id');
             $table->foreign('request_id')->references('id')->on('requests');

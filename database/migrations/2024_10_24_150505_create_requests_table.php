@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             //clave foranea a users
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
