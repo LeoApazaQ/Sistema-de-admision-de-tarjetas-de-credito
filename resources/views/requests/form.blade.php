@@ -64,7 +64,8 @@
             <label for="documentos">Documentación Requerida</label>
             <input type="file" class="form-control-file" id="documentos" name="documentos[]" multiple required>
         </div>
- --}}
+--}}
+
         <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
         <a href="{{-- {{ route('solicitudes.index') }} --}}" class="btn btn-secondary">Cancelar</a>
     </form>

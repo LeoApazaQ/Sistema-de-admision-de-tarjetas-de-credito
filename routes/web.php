@@ -35,3 +35,8 @@ Route::get('/administrar/usuarios', function () {
     return view('roles.index');
 })->name('usuarios.index');
 
+//redireccion a admin panel
+Route::get('/admin', function () {
+    return view('layouts.admin');
+})->name('admin.index');
+
