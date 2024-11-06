@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\RequestController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,4 +39,7 @@ Route::get('/administrar/usuarios', function () {
 Route::get('/admin', function () {
     return view('layouts.admin');
 })->name('admin.index');
+
+Route::resource('/request', RequestController::class);
+
 

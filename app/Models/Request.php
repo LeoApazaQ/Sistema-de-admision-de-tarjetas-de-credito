@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Request extends Model
 {
+    
 
     public function user()
     {
@@ -20,6 +21,11 @@ class Request extends Model
     public function actions()
     {
         return $this->hasMany(RequestAction::class);
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
     }
 
 }

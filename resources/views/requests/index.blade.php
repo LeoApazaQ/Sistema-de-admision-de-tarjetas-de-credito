@@ -4,8 +4,8 @@
 
 @section('content')
 <div class="container">
-
     <h2 class="mb-3">Listado de Solicitudes</h2>
+    <button class="container btn btn-primary" onclick="window.location='{{ route('request.create') }}'">Agregar solicitud</button>
     <table class="table table-striped">
         <thead>
             <tr>

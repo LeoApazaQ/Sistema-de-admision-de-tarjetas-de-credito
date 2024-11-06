@@ -8,7 +8,7 @@
         @csrf
 
         <div class="form-group">
-            <label for="nombre">Nombre Completo</label>
+            <label for="name">Nombre Completo</label>
             <input type="text" class="form-control" id="nombre" name="nombre" required>
         </div>
 

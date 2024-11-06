@@ -13,12 +13,16 @@ return new class extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
             //clave foranea a users
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             //clave foranea a statuses
             $table->unsignedBigInteger('status_id');
             $table->foreign('status_id')->references('id')->on('statuses');
+            //clave foranea a clients
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients');
             $table->timestamps();
         });
     }

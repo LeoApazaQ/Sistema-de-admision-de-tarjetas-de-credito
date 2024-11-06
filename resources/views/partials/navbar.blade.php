@@ -8,7 +8,7 @@
         <li><a href="#">Trabajo &dtrif;</a>
             <ul class="dropdown">
                 <li><a href="{{ route('admin.index') }}">Panel de administracion</a></li>
-                <li><a href="{{ route('ingresar.solicitud') }}">Formulario de solicitud</a></li>
+                <li><a href="{{ route('request.index') }}">Formulario de solicitud</a></li>
                 <li><a href="{{ route('ver.solicitudes') }}">Ver solicitudes</a></li>
                 <li><a href="{{ route('usuarios.index') }}">Administrar usuarios</a></li>
                 <li><a href="{{ route('ver.usuarios') }}">Ver usuarios</a></li>
