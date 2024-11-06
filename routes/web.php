@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\ClientController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -42,4 +43,4 @@ Route::get('/admin', function () {
 
 Route::resource('/request', RequestController::class);
 
-
+Route::resource('/clients', ClientController::class);

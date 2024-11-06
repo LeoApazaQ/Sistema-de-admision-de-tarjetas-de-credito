@@ -1,83 +1,155 @@
-nav {
-    &.primary-navigation {
-        margin: 0 auto;
+/* Estilos generales */
+nav.primary-navigation {
+    margin: 0 auto;
+    padding: 20px 0;
+    text-align: left;
+    font-size: 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: #1f2937; /* Un color oscuro para el fondo */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #3b82f6; /* Un borde sutil de color azul */
+
+    /* Flex container para el menú */
+    ul {
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        align-items: center;
+    }
+
+    ul li {
+        list-style: none;
+        display: inline-block;
+        position: relative;
+        padding: 12px 20px;
+        color: white;
+        font-family: 'Arial', sans-serif;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    ul li a {
+        color: #e5e7eb; /* Gris claro para los textos */
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    ul li a:hover {
+        color: #3b82f6; /* Color de hover en azul */
+    }
+
+    /* Iconos dentro de los enlaces */
+    ul li i {
+        font-size: 18px;
+    }
+
+    /* Submenú (dropdown) */
+    .dropdown {
+        display: none;
+        position: absolute;
+        left: 0;
+        background-color: #374151;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        min-width: 220px;
+        padding: 10px 0;
+        z-index: 999;
+        border-radius: 8px;
+    }
+
+    ul li:hover .dropdown {
+        display: block; /* Mostrar submenú al pasar el ratón */
+    }
+
+    .dropdown li {
+        padding: 10px 20px;
+        color: #e5e7eb;
+        font-size: 14px;
+    }
+
+    .dropdown li a {
         display: block;
-        padding: 15px 0 0 0;
-        text-align: left;
-        font-size: 16px;
+    }
+
+    .dropdown li a:hover {
+        background-color: #3b82f6; /* Fondo azul claro al hacer hover */
+        color: white;
+    }
+
+    /* Estilos para el botón hamburguesa */
+    .menu-toggle {
+        display: none; /* Ocultar el botón hamburguesa por defecto */
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+        cursor: pointer;
+    }
+
+    .menu-toggle .bar {
+        width: 30px;
+        height: 4px;
+        background-color: white;
+        border-radius: 5px;
+    }
+}
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 768px) {
+    nav.primary-navigation {
+        .menu-toggle {
+            display: flex; /* Mostrar el botón hamburguesa */
+        }
+
+        ul {
+            display: none; /* Ocultar el menú en pantallas pequeñas */
+            width: 100%;
+            background-color: #1f2937;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            flex-direction: column;
+            padding-top: 15px;
+            z-index: 999;
+            border-radius: 8px;
+        }
+
+        ul.active {
+            display: block; /* Mostrar el menú cuando el estado 'active' esté activo */
+        }
 
         ul li {
-            list-style: none;
-            margin: 0 auto;
-            border-right: 2px solid #3ca0e7;
-            border-left: 2px solid #3ca0e7;
-            display: inline-block;
-            padding: 0 30px;
-            position: relative;
-            text-decoration: none;
-            text-align: center;
-            font-family: arvo;
-        }
-
-        li a {
-            color: black;
-        }
-
-        li a:hover {
-            color: #3ca0e7;
-        }
-
-        li:hover {
-            cursor: pointer;
-        }
-
-        ul li ul {
-            visibility: hidden;
-            opacity: 0;
-            position: absolute;
-            padding-left: 0;
-            left: 0;
-            display: none;
-            background: white;
-        }
-
-        ul li:hover>ul,
-        ul li ul:hover {
-            visibility: visible;
-            opacity: 1;
-            display: block;
-            min-width: 250px;
-            text-align: left;
-            padding-top: 20px;
-            box-shadow: 0px 3px 5px -1px #ccc;
-        }
-
-        ul li ul li {
-            clear: both;
+            text-align: left; /* Alinear los items a la izquierda */
+            padding: 15px;
             width: 100%;
-            text-align: left;
-            margin-bottom: 20px;
-            border-style: none;
         }
 
-        ul li ul li a:hover {
-            padding-left: 10px;
-            border-left: 2px solid #3ca0e7;
-            transition: all 0.3s ease;
+        .dropdown {
+            position: relative;
+            display: block;
+            min-width: 100%;
         }
     }
 }
 
-a {
-
-    text-decoration: none;
-
-    &:hover {
-        color: #3CA0E7;
-    }
-
+/* Animación para mostrar el submenú con un efecto */
+ul li .dropdown {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s ease 0.3s;
 }
 
-ul li ul li a {
-    transition: all 0.5s ease;
+ul li:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
 }
+
