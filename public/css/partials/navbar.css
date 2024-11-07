@@ -9,9 +9,9 @@ nav.primary-navigation {
     left: 0;
     right: 0;
     z-index: 1000;
-    background-color: #1f2937; /* Un color oscuro para el fondo */
+    background-color: #1f2937;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-    border-bottom: 2px solid #3b82f6; /* Un borde sutil de color azul */
+    border-bottom: 2px solid #3b82f6;
 
     /* Flex container para el menú */
     ul {
@@ -53,7 +53,7 @@ nav.primary-navigation {
 
     /* Submenú (dropdown) */
     .dropdown {
-        display: none;
+        display: none; /* Por defecto, el submenú está oculto */
         position: absolute;
         left: 0;
         background-color: #374151;
@@ -134,22 +134,12 @@ nav.primary-navigation {
 
         .dropdown {
             position: relative;
-            display: block;
+            display: none; /* Asegurarse de que el submenú esté oculto por defecto en pantallas pequeñas */
             min-width: 100%;
+        }
+
+        ul li.menu-item-with-dropdown.active .dropdown {
+            display: block; /* Mostrar el submenú solo cuando el padre tiene la clase 'active' */
         }
     }
 }
-
-/* Animación para mostrar el submenú con un efecto */
-ul li .dropdown {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0s ease 0.3s;
-}
-
-ul li:hover .dropdown {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.3s ease;
-}
-

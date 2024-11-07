@@ -31,8 +31,18 @@
 
 <script>
     // JavaScript para mostrar y ocultar el menú
-document.getElementById("menu-toggle").addEventListener("click", function() {
+    document.getElementById("menu-toggle").addEventListener("click", function() {
     var navList = document.querySelector("nav.primary-navigation ul");
     navList.classList.toggle("active"); // Alternar la clase 'active' para mostrar u ocultar el menú
 });
+
+// Agregar un evento de clic para la opción "Trabajo" en pantallas pequeñas
+var trabajoItem = document.querySelector("nav.primary-navigation ul li:nth-child(2)"); // Esto selecciona el elemento "Trabajo"
+trabajoItem.addEventListener("click", function(event) {
+    if (window.innerWidth <= 768) { // Solo aplicar en pantallas pequeñas
+        event.preventDefault(); // Prevenir la acción por defecto (navegar)
+        trabajoItem.classList.toggle("active"); // Alternar la clase 'active' para mostrar el submenú
+    }
+});
+
 </script>
