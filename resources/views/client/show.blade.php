@@ -11,15 +11,13 @@
                 <div class="card">
                     <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Client</span>
+                            <span class="card-title">{{ __('Mostrando') }} Cliente</span>
                         </div>
                         <div class="float-right">
                             <a class="btn btn-primary btn-sm" href="{{ route('clients.index') }}"> {{ __('Back') }}</a>
                         </div>
                     </div>
-
                     <div class="card-body bg-white">
-                        
                                 <div class="form-group mb-2 mb20">
                                     <strong>Nombres:</strong>
                                     {{ $client->nombres }}
@@ -52,7 +50,6 @@
                                     <strong>Ocupacion:</strong>
                                     {{ $client->ocupacion }}
                                 </div>
-
                     </div>
                 </div>
             </div>

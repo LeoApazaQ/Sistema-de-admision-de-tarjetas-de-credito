@@ -47,14 +47,14 @@ class User extends Authenticatable
         ];
     }
 
-    public function request()
+    public function applications()
     {
-        return $this->hasMany(Request::class);
+        return $this->hasMany(Application::class);
     }
 
     public function actions()
     {
-        return $this->hasMany(RequestAction::class);
+        return $this->hasMany(ApplicationAction::class);
     }
 
     public function employee()

@@ -25,8 +25,8 @@ class Client extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function requests()
+    public function applications()
     {
-        return $this->hasMany(Request::class, 'id', 'client_id');
+        return $this->hasMany(Application::class, 'id', 'client_id');
     }
 }

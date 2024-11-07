@@ -1,4 +1,9 @@
 /* Estilos generales */
+
+body {
+    margin-top: 100px;
+}
+
 nav.primary-navigation {
     margin: 0 auto;
     padding: 20px 0;

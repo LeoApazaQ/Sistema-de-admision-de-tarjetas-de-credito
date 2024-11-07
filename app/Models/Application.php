@@ -4,10 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Request extends Model
+class Application extends Model
 {
-    
-
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -20,7 +18,7 @@ class Request extends Model
 
     public function actions()
     {
-        return $this->hasMany(RequestAction::class);
+        return $this->hasMany(ApplicationAction::class);
     }
 
     public function client()
