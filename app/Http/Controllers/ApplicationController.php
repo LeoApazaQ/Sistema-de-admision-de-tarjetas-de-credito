@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Application;
+use App\Models\Client;
 
 class ApplicationController extends Controller
 {
@@ -20,6 +22,12 @@ class ApplicationController extends Controller
     public function create()
     {
         return view('requests.form');
+
+        $client = new Client();
+        $client->fill(request()->all());
+        if ($client->save()) {
+            Application::create(['client_id' => $client->id]);
+        }
     }
 
     /**
