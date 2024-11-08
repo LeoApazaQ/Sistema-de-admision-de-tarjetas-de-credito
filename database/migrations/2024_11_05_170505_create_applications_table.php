@@ -18,7 +18,7 @@ return new class extends Migration
             /* $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users'); */
             //clave foranea a statuses
-            $table->unsignedBigInteger('status_id');
+            $table->unsignedBigInteger('status_id')->default(1);
             $table->foreign('status_id')->references('id')->on('statuses')->ondelete('cascade');
             //clave foranea a clients
             $table->unsignedBigInteger('client_id');

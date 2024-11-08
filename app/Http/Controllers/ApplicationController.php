@@ -23,11 +23,7 @@ class ApplicationController extends Controller
     {
         return view('requests.form');
 
-        $client = new Client();
-        $client->fill(request()->all());
-        if ($client->save()) {
-            Application::create(['client_id' => $client->id]);
-        }
+
     }
 
     /**
@@ -35,7 +31,16 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Create a new Client instance
+        $client = new Client();
+
+        // Fill the client with data from the request
+        $client->fill(request()->all());
+
+        // Save the client and create an Application if successful
+        if ($client->save()) {
+            Application::create(['client_id' => $client->id]);
+        }
     }
 
     /**
