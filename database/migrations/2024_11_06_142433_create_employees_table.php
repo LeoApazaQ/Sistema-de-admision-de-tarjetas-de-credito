@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('telefono', 15);
             $table->string('puesto');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->ondelete('cascade');
             $table->timestamps();
         });
     }

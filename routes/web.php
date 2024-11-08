@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RequestController;
+
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\HomeController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -11,7 +14,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/ingresar/solicitud', function () {
     return view('requests.form');
@@ -41,6 +44,6 @@ Route::get('/admin', function () {
     return view('layouts.admin');
 })->name('admin.index');
 
-Route::resource('/request', RequestController::class);
+Route::resource('/applications', ApplicationController::class);
 
 Route::resource('/clients', ClientController::class);

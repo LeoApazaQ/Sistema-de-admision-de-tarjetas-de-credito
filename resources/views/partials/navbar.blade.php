@@ -13,7 +13,7 @@
         <span class="bar"></span>
     </div>
     <ul>
-        <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
+        <li><a href="{{ route('home') }}"><i class="fas fa-home"></i> Inicio</a></li>
         <li><a href="#"><i class="fas fa-briefcase"></i> Trabajo &dtrif;</a>
             <ul class="dropdown">
                 <li><a href="{{ route('admin.index') }}"><i class="fas fa-tachometer-alt"></i> Panel de administración</a></li>

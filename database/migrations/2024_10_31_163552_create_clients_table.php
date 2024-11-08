@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('dni', 8);
             $table->date('fecha_nacimiento');
             $table->string('direccion');
-            $table->string('telefono', 15);
+            $table->string('telefono', 25);
             $table->integer('ingresos_mensuales');
             $table->string('ocupacion');
             $table->timestamps();

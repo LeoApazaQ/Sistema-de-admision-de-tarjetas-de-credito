@@ -13,13 +13,13 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Clientes') }}
+                                <h4>{{ __('Clientes') }}</h4>
                             </span>
 
                             <div class="float-right">
                                 <a href="{{ route('clients.create') }}" class="btn btn-primary btn-sm float-right"
                                     data-placement="left">
-                                    {{ __('Create New') }}
+                                    {{ __('Crear nuevo cliente') }}
                                 </a>
                             </div>
                         </div>
@@ -45,6 +45,7 @@
                                         <th>Telefono</th>
                                         <th>Ingresos Mensuales</th>
                                         <th>Ocupacion</th>
+                                        <th style="width: 300px">Acciones</th>
 
                                         <th></th>
                                     </tr>
@@ -65,15 +66,15 @@
 
                                             <td>
                                                 <form action="{{ route('clients.destroy', $client->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary "
+                                                    <a class="btn btn-sm btn-primary mr-1"
                                                         href="{{ route('clients.show', $client->id) }}"><i
                                                             class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success"
+                                                    <a class="btn btn-sm btn-success mr-1"
                                                         href="{{ route('clients.edit', $client->id) }}"><i
                                                             class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"
+                                                    <button type="submit" class="btn btn-danger btn-sm mr-1"
                                                         onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i
                                                             class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
                                                 </form>
@@ -85,7 +86,10 @@
                         </div>
                     </div>
                 </div>
-                {!! $clients->withQueryString()->links() !!}
+                <div class="d-flex justify-content-center">
+                    {!! $clients->withQueryString()->links('pagination::bootstrap-4') !!}
+                </div>
+
             </div>
         </div>
     </div>

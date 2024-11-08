@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\ClientRequest;
@@ -16,7 +17,7 @@ class ClientController extends Controller
      */
     public function index(Request $request): View
     {
-        $clients = Client::paginate();
+        $clients = Client::paginate(10);
         return view('client.index', compact('clients'))
             ->with('i', ($request->input('page', 1) - 1) * $clients->perPage());
     }
@@ -32,16 +33,21 @@ class ClientController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * creando un nuevo cliente 
      */
     public function store(ClientRequest $request): RedirectResponse
     {
         Client::create($request->validated());
+        $client = Client::create($request->validated());
 
+        Application::create([
+            'client_id' => $client->id,
+
+        ]);
         return Redirect::route('clients.index')
             ->with('success', 'Nuevo cliente creado con exito.');
-
     }
+
     /**
      * Display the specified resource.
      */

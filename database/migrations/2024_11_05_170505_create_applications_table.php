@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             //clave foranea a users
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            /* $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users'); */
             //clave foranea a statuses
             $table->unsignedBigInteger('status_id');
-            $table->foreign('status_id')->references('id')->on('statuses');
+            $table->foreign('status_id')->references('id')->on('statuses')->ondelete('cascade');
             //clave foranea a clients
             $table->unsignedBigInteger('client_id');
-            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('client_id')->references('id')->on('clients')->ondelete('cascade');
             $table->timestamps();
         });
     }

@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('action_type');
             //clave foranea a requests
-            $table->unsignedBigInteger('request_id');
-            $table->foreign('request_id')->references('id')->on('requests');
+            $table->unsignedBigInteger('application_id');
+            $table->foreign('application_id')->references('id')->on('applications')->ondelete('cascade');
             //clave foranea de user
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->ondelete('cascade');
             $table->timestamps();
         });
     }
