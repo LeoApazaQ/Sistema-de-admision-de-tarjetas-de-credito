@@ -2,13 +2,13 @@
     <div class="col-md-12">
 
         <div class="form-group mb-2 mb20">
-            <label for="title" class="form-label">{{ __('Title') }}</label>
+            <label for="title" class="form-label">{{ __('Titulo') }}</label>
             <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title', $application?->title ?? 'Solicitud de credito - ' . date('Y-m-d-h-i')) }}" id="title" placeholder="Title" readonly>
             {!! $errors->first('title', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
 
         <div class="form-group mb-2 mb20">
-            <label for="status_id" class="form-label">{{ __('Status Id') }}</label>
+            <label for="status_id" class="form-label">{{ __('Estado') }}</label>
             <select name="status_id" class="form-control @error('status_id') is-invalid @enderror" id="status_id">
                 <option value="">Seleccione un estado</option>
                 @foreach ($statuses as $status)
@@ -19,7 +19,7 @@
         </div>
 
         <div class="form-group mb-2 mb20">
-            <label for="client_id" class="form-label">{{ __('Client Id') }}</label>
+            <label for="client_id" class="form-label">{{ __('Cliente') }}</label>
             <select name="client_id" class="form-control @error('client_id') is-invalid @enderror" id="client_id">
                 <option value="">Seleccione un cliente</option>
                 @foreach ($clients as $client)
