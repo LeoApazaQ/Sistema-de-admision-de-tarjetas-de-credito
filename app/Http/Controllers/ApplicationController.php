@@ -2,76 +2,89 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Application;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use App\Http\Requests\ApplicationRequest;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 use App\Models\Client;
+use App\Models\Status;
 
 class ApplicationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): View
     {
-        return view('requests.index');
+        $applications = Application::paginate(10);
+
+        return view('application.index', compact('applications'))
+            ->with('i', ($request->input('page', 1) - 1) * $applications->perPage());
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        return view('requests.form');
+        $application = new Application();
+        $statuses = Status::all();
+        $clients = Client::all();
 
-
+        return view('application.create', compact('application', 'clients', 'statuses'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ApplicationRequest $request): RedirectResponse
     {
-        // Create a new Client instance
-        $client = new Client();
+        Application::create($request->validated());
 
-        // Fill the client with data from the request
-        $client->fill(request()->all());
-
-        // Save the client and create an Application if successful
-        if ($client->save()) {
-            Application::create(['client_id' => $client->id]);
-        }
+        return Redirect::route('applications.index')
+            ->with('success', 'Application created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id): View
     {
-        //
+        $application = Application::find($id);
+
+        return view('application.show', compact('application'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id): View
     {
-        //
+        $application = Application::find($id);
+        $statuses = Status::all();
+        $clients = Client::all();
+
+        return view('application.edit', compact('application', 'statuses', 'clients'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ApplicationRequest $request, Application $application): RedirectResponse
     {
-        //
+        $application->update($request->validated());
+
+        return Redirect::route('applications.index')
+            ->with('success', 'Application updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy($id): RedirectResponse
     {
-        //
+        Application::find($id)->delete();
+
+        return Redirect::route('applications.index')
+            ->with('success', 'Application deleted successfully');
     }
 }

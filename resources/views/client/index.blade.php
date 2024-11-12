@@ -86,7 +86,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center">
+                <div class="mt-5 d-flex justify-content-center">
                     {!! $clients->withQueryString()->links('pagination::bootstrap-4') !!}
                 </div>
 

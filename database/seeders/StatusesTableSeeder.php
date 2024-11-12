@@ -13,10 +13,10 @@ class StatusesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Status::create(['nombre' => 'pendiente']);
-        Status::create(['nombre' => 'aprobada']);
-        Status::create(['nombre' => 'rechazada']);
-        Status::create(['nombre' => 'en_proceso']);
+        Status::create(['nombre' => 'Pendiente']);
+        Status::create(['nombre' => 'Aprobada']);
+        Status::create(['nombre' => 'Rechazada']);
+        Status::create(['nombre' => 'En proceso']);
     }
 }
 

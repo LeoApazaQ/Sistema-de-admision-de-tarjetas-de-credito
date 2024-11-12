@@ -16,14 +16,6 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/ingresar/solicitud', function () {
-    return view('requests.form');
-})->name('ingresar.solicitud');
-
-Route::get('/ver/colicitudes', function () {
-    return view('requests.index');
-})->name('ver.solicitudes');
-
 
 Route::get('/ver/usuarios', function () {
     return view('users.index');
