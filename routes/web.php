@@ -17,28 +17,25 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+//rutas para el empleado
+Route::group(['prefix' => 'Empleado', 'middleware' => ['role:Empleado']], function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::resource('/clients', ClientController::class);
+});
 
-//redireccion a admin panel
-Route::get('/admin', function () {
-    return view('layouts.admin');
-})->name('admin.index');
-
-Route::resource('/applications', ApplicationController::class);
-
-Route::resource('/clients', ClientController::class);
+//rutas para el gerente
+Route::group(['prefix' => 'gerente' ,'middleware' => ['role:Gerente']], function () {
+    Route::resource('/applications', ApplicationController::class);
+});
 
 //Rutas para el administrador
-Route::prefix('admin')->group(function () {
+Route::group(['prefix' => 'admin' ,'middleware' => ['role:Admin']], function () {
+    Route::get('/admin', function () { //redireccion a admin panel
+        return view('layouts.admin');
+    })->name('admin.index');
     Route::resource('/roles', RoleController::class);
     Route::resource('/permisos', PermissionController::class);
     Route::get('/usuarios', [UserController::class, 'index'])->name('admin.user');
     Route::resource('/usuarios-roles', AssignRoleController::class);
 });
-
-
-
-
-
-
