@@ -19,12 +19,19 @@
                 <li><a href="{{ route('admin.index') }}"><i class="fas fa-tachometer-alt"></i> Panel de administración</a></li>
                 <li><a href="{{ route('applications.index') }}"><i class="fas fa-file-alt"></i> Listado de solicitudes</a></li>
                 <li><a href="{{ route('applications.create') }}"><i class="fas fa-search"></i> Crear una solicitud</a></li>
-                <li><a href="{{ route('clients.index') }}"><i class="fas fa-users"></i> Administrar usuarios</a></li>
-                <li><a href=""><i class="fas fa-eye"></i> Ver usuarios</a></li>
+                <li><a href="{{ route('clients.index') }}"><i class="fas fa-users"></i> Administrar Clientes</a></li>
+                <li><a href=""><i class="fas fa-eye"></i> Ver Clientes</a></li>
             </ul>
         </li>
         <li><a href="#"><i class="fas fa-info-circle"></i> Nosotros</a></li>
-        <li><a href="#"><i class="fas fa-phone-alt"></i> Contáctanos</a></li>
+        <li>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="dropdown-item">
+                    <i class="fas fa-phone-alt"></i> Cerrar sesión
+                </button>
+            </form>
+        </li>
     </ul>
 </nav>
 

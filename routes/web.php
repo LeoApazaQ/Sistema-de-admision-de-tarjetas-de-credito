@@ -17,7 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
 //rutas para el empleado
 Route::group(['prefix' => 'Empleado', 'middleware' => ['role:Empleado']], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
