@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Panel de administracion',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -327,14 +327,30 @@ return [
             'label' => 4,
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'Roles y permisos'],
         [
-            'text' => 'profile',
+            'text' => 'roles',
+            'url' => 'admin/roles',
+            'icon' => 'fas fa-fw fa-user-shield',
+        ],
+        [
+            'text' => 'Permisos',
+            'url' => 'admin/permisos',
+            'icon' => 'fas fa-fw fa-user-shield',
+        ],
+        [
+            'text' => 'Usuarios',
+            'url' => 'admin/usuarios',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        ['header' => 'configuracion'],
+        [
+            'text' => 'perfil',
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
+            'text' => 'cambiar password',
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
