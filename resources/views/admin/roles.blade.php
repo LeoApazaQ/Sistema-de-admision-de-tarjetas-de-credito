@@ -28,7 +28,7 @@
                                 <tr>
                                     <td>{{ $role->name }}</td>
                                     <td>
-                                        <a class="btn btn-success" href="">Permisos</a>
+                                        <a class="btn btn-success" href="{{ route('roles.show', $role) }}">Permisos</a>
                                         <a href="{{ route('roles.edit', $role) }}" class="btn btn-info">Editar</a>
                                         <form action="{{ route('roles.destroy', $role) }}" method="post" class="d-inline">
                                             @csrf

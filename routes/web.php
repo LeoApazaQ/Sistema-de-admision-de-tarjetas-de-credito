@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\AssignRoleController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
@@ -19,10 +20,6 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
-Route::get('/administrar/usuarios', function () {
-    return view('roles.index');
-})->name('usuarios.index');
-
 //redireccion a admin panel
 Route::get('/admin', function () {
     return view('layouts.admin');
@@ -37,6 +34,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('/roles', RoleController::class);
     Route::resource('/permisos', PermissionController::class);
     Route::get('/usuarios', [UserController::class, 'index'])->name('admin.user');
+    Route::resource('/usuarios-roles', AssignRoleController::class);
 });
 
 

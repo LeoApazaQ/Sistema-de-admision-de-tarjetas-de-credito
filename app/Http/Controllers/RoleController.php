@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -12,6 +13,7 @@ class RoleController extends Controller
      */
     public function index()
     {
+        //mostrar los roles
         $roles = Role::all();
 
         return view('admin.roles', compact('roles'));
@@ -30,7 +32,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-              
+        // creacion de un nuevo rol
         $role = Role::create([
             'name' => $request->input('name'),
         ]);
@@ -44,7 +46,12 @@ class RoleController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // mostrar los permisos
+        $role = Role::find($id);
+        $permissions = Permission::all();
+        $rolePermissions = $role->permissions->pluck('id')->toArray();
+
+        return view('admin.role-permission', compact('role', 'permissions', 'rolePermissions'));
     }
 
     /**
@@ -60,7 +67,16 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // actualizar los permisos de los roles
+        $role = Role::find($id);
+        $permissionsId = $request->input('permissions', []);
+
+        $permissions = Permission::whereIn('id', $permissionsId)->pluck('name')->toArray();
+
+        $role->syncPermissions($permissions);
+
+        return redirect()->route('roles.index')
+            ->with('success', 'Permisos actualizados exitosamente.');
     }
 
     /**

@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
-class PermissionController extends Controller
+class AssignRoleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // mostrar los permisos
-        $permissions = Permission::all();
-        return view('admin.permissions', compact('permissions'));
+        //
     }
 
     /**
@@ -22,7 +21,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('admin.permissions-create');
+        //
     }
 
     /**
@@ -30,13 +29,7 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        // creacion de un nuevo permiso
-        $permission = Permission::create([
-            'name' => $request->input('name'),
-        ]);
-
-        return redirect()->route('permisos.index')
-            ->with('success', 'Permiso creado exitosamente.');
+        //
     }
 
     /**
@@ -44,7 +37,13 @@ class PermissionController extends Controller
      */
     public function show(string $id)
     {
-        //
+        //mostrar los roles
+        $user = User::find($id);
+        $roles = Role::all();
+
+        $userRoles = $user->roles->pluck('id')->toArray();
+
+        return view('admin.user-roles', compact('user', 'roles', 'userRoles'));
     }
 
     /**
@@ -60,7 +59,15 @@ class PermissionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //agregar rol a los usuarios
+        $user = User::find($id);
+        $rolesId = $request->input('roles', []);
+
+        $roles = Role::wherein('id', $rolesId)->pluck('name')->toArray();
+
+        $user->syncRoles($roles);
+
+        return redirect()->route('admin.user')->with('success', 'Roles actualizados exitosamente.');
     }
 
     /**

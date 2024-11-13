@@ -32,7 +32,7 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->roles->first()->name ?? 'sin rol' }}</td>
                                     <td>
-                                        <a class="btn btn-secondary" href="">Roles</a>
+                                        <a class="btn btn-secondary" href="{{ route('usuarios-roles.show', $user) }}">Roles</a>
                                         <a class="btn btn-success" href="">Permisos</a>
                                     </td>
                                     {{-- <td>
