@@ -17,15 +17,21 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//rutas para el empleado
+//Rutas para el empleado
 Route::group(['prefix' => 'Empleado', 'middleware' => ['role:Empleado']], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::resource('/clients', ClientController::class);
+    Route::resource('/clients', ClientController::class)->only(['index', 'show', 'create', 'store']);
 });
 
-//rutas para el gerente
+//Rutas para el gerente
 Route::group(['prefix' => 'gerente' ,'middleware' => ['role:Gerente']], function () {
-    Route::resource('/applications', ApplicationController::class);
+    Route::resource('/applications', ApplicationController::class)->only(['edit', 'update', 'destroy']);
+    Route::resource('/clients', ClientController::class)->only(['edit', 'update', 'destroy']);
+});
+
+//rutas compartidas de gerente y empleado
+Route::group(['prefix' => 'solicitud', 'middleware' => ['role:Gerente|Empleado']], function (){
+    Route::resource('/applications', ApplicationController::class)->only(['index', 'show', 'create', 'store']);
 });
 
 //Rutas para el administrador
