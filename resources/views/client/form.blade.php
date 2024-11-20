@@ -2,26 +2,29 @@
     <div class="col-md-12">
 
         <div class="form-group mb-2 mb20">
-            <label for="nombres" class="form-label">{{ __('Nombres') }}</label>
-            <input type="text" name="nombres" class="form-control @error('nombres') is-invalid @enderror"
-                value="{{ old('nombres', $client?->nombres) }}" id="nombres" placeholder="Nombres" required>
-            {!! $errors->first('nombres', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="apellidos" class="form-label">{{ __('Apellidos') }}</label>
-            <input type="text" name="apellidos" class="form-control @error('apellidos') is-invalid @enderror"
-                value="{{ old('apellidos', $client?->apellidos) }}" id="apellidos" placeholder="Apellidos" required>
-            {!! $errors->first('apellidos', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
             <label for="dni" class="form-label">{{ __('Dni') }}</label>
-            <input type="text" name="dni" class="form-control @error('dni') is-invalid @enderror"
+            <input {{ $client->dni ? 'readonly' : '' }} type="text" name="dni" class="form-control @error('dni') is-invalid @enderror"
                 value="{{ old('dni', $client?->dni) }}" id="dni" placeholder="Dni" required>
             {!! $errors->first('dni', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
+
+        <div class="form-group mb-2 mb20">
+            <label for="nombres" class="form-label">{{ __('Nombres') }}</label>
+            <input {{ $client->dni ? 'readonly' : '' }} type="text" name="nombres" class="form-control @error('nombres') is-invalid @enderror"
+                value="{{ old('nombres', $client?->nombres) }}" id="nombres" placeholder="Nombres" required>
+            {!! $errors->first('nombres', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+        </div>
+
+        <div class="form-group mb-2 mb20">
+            <label for="apellidos" class="form-label">{{ __('Apellidos') }}</label>
+            <input {{ $client->dni ? 'readonly' : '' }} type="text" name="apellidos" class="form-control @error('apellidos') is-invalid @enderror"
+                value="{{ old('apellidos', $client?->apellidos) }}" id="apellidos" placeholder="Apellidos" required>
+            {!! $errors->first('apellidos', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+        </div>
+
         <div class="form-group mb-2 mb20">
             <label for="fecha_nacimiento" class="form-label">{{ __('Fecha Nacimiento') }}</label>
-            <input type="date" name="fecha_nacimiento"
+            <input {{ $client->dni ? 'readonly' : '' }} type="date" name="fecha_nacimiento"
                 class="form-control @error('fecha_nacimiento') is-invalid @enderror"
                 value="{{ old('fecha_nacimiento', $client?->fecha_nacimiento) }}" id="fecha_nacimiento"
                 placeholder="Fecha Nacimiento" required>
@@ -65,3 +68,34 @@
         <button type="submit" class="btn btn-primary">{{ __('Enviar') }}</button>
     </div>
 </div>
+
+<script>
+document.getElementById("dni").addEventListener("input", function() {
+    let dni = document.getElementById("dni").value;  // Obtener el DNI ingresado
+
+    // Verificar si el DNI tiene 8 dígitos
+    if (dni.length === 8) {
+        fetch("https://apiperu.dev/api/dni/" + dni + "?api_token=843f3fd1ee8e609fb243c2cd081c8c0c0811d5ed7780a353eeb6c31897c6c79e")
+        .then((response) => response.json())  // Convertir la respuesta a JSON
+        .then((data) => {
+            // Verificar que la respuesta tenga la propiedad 'data' y que contenga los valores que necesitamos
+            if (data.data) {
+                let nombres = data.data.nombres || '';  // Asignar el valor de 'nombres'
+                let apellidos = data.data.apellido_paterno + ' ' + data.data.apellido_materno || '';  // Concatenar apellidos
+
+                // Asignar los valores a los campos del formulario
+                document.getElementById("nombres").value = nombres;
+                document.getElementById("apellidos").value = apellidos;
+
+                console.log('Datos obtenidos:', data.data);  // Ver los datos en consola
+            } else {
+                console.error('No se pudieron obtener los datos del cliente.');
+            }
+        })
+        .catch((error) => {
+            console.error('Error al traer los datos:', error);
+        });
+    }
+});
+
+</script>

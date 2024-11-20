@@ -38,6 +38,7 @@ Route::group(['prefix' => 'empleado', 'middleware' => ['role:Empleado']], functi
 //Rutas para el gerente
 Route::group(['prefix' => 'gerente' ,'middleware' => ['role:Gerente']], function () {
     Route::resource('/applications', ApplicationController::class)->only(['edit', 'update', 'destroy']);
+    Route::get('/applications/api', [ApplicationController::class, 'api'])->name('applications.api');
     Route::resource('/clients', ClientController::class)->only(['edit', 'update', 'destroy']);
 });
 

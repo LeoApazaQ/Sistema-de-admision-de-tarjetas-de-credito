@@ -33,17 +33,20 @@ class ClientController extends Controller
     }
 
     /**
-     * creando un nuevo cliente 
+     * creando un nuevo cliente
      */
     public function store(ClientRequest $request): RedirectResponse
     {
+        
+        //Se crea un nuevo cliente
         Client::create($request->validated());
         $client = Client::create($request->validated());
 
+        //se crea una solicitud para el nuevo cliente
         Application::create([
             'client_id' => $client->id,
-
         ]);
+
         return Redirect::route('clients.index')
             ->with('success', 'Nuevo cliente creado con exito.');
     }

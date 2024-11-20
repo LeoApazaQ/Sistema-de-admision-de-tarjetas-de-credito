@@ -19,7 +19,7 @@
                         <div class="form-group">
                             <label for="name">Nombre del Permiso</label>
                             <input type="text" name="name" class="form-control" id="name"
-                                placeholder="Ingrese el nombre del rol">
+                                placeholder="Ingrese el nombre del Permiso">
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>

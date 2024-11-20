@@ -24,7 +24,7 @@ class ClientRequest extends FormRequest
         return [
 			'nombres' => 'required|string',
 			'apellidos' => 'required|string',
-			'dni' => 'required|string',
+			'dni' => 'unique:clients|required|string',
 			'fecha_nacimiento' => 'required',
 			'direccion' => 'required|string',
 			'telefono' => 'required|string',

@@ -10,9 +10,11 @@
         <div class="form-group mb-2 mb20">
             <label for="status_id" class="form-label">{{ __('Estado') }}</label>
             <select name="status_id" class="form-control @error('status_id') is-invalid @enderror" id="status_id">
-                <option value="">Seleccione un estado</option>
+                <option value="{{ $statuses->first()->id }}" {{ old('status_id', $application?->status_id) == $statuses->first()->id ? 'selected' : '' }}>{{ $statuses->first()->nombre }}</option>
                 @foreach ($statuses as $status)
-                    <option value="{{ $status->id }}" {{ old('status_id', $application?->status_id) == $status->id ? 'selected' : '' }}>{{ $status->nombre }}</option>
+                    @if($status->id != $statuses->first()->id)
+                        <option value="{{ $status->id }}" {{ old('status_id', $application?->status_id) == $status->id ? 'selected' : '' }}>{{ $status->nombre }}</option>
+                    @endif
                 @endforeach
             </select>
             {!! $errors->first('status_id', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
@@ -28,7 +30,6 @@
             </select>
             {!! $errors->first('client_id', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
-
     </div>
     <div class="col-md-12 mt20 mt-2">
         <button type="submit" class="btn btn-primary">{{ __('Enviar') }}</button>

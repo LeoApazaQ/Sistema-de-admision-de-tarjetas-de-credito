@@ -41,6 +41,7 @@ class ApplicationController extends Controller
      */
     public function store(ApplicationRequest $request): RedirectResponse
     {
+        dd(Application::create($request->validated()));
         Application::create($request->validated());
 
         return Redirect::route('applications.index')
@@ -86,5 +87,10 @@ class ApplicationController extends Controller
 
         return Redirect::route('applications.index')
             ->with('success', 'Application deleted successfully');
+    }
+
+    public function api()
+    {
+        return view('application.apitest');
     }
 }

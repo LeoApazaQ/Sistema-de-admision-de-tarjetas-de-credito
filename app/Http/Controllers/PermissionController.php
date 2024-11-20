@@ -22,7 +22,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('admin.permissions-create');
+        return view('admin.permission-create');
     }
 
     /**

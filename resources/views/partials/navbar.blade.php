@@ -21,7 +21,7 @@
                 <li><a href="{{ route('applications.index') }}"><i class="fas fa-file-alt"></i> Listado de solicitudes</a></li>
                 <li><a href="{{ route('applications.create') }}"><i class="fas fa-search"></i> Crear una solicitud</a></li>
                 <li><a href="{{ route('clients.index') }}"><i class="fas fa-users"></i> Administrar Clientes</a></li>
-                <li><a href=""><i class="fas fa-eye"></i> Ver Clientes</a></li>
+                <li><a href="{{ route('applications.api')}}"><i class="fas fa-eye"></i> probar api</a></li>
             </ul>
         </li>
         <li><a href="#"><i class="fas fa-info-circle"></i>Nosotros</a></li>
@@ -29,7 +29,7 @@
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="dropdown-item">
-                    <i class="fas fa-phone-alt">Cerrar sesión</i> 
+                    <i class="fas fa-phone-alt">Cerrar sesión</i>
                 </button>
             </form>
         </li>
