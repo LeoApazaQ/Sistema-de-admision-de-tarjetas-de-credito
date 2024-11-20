@@ -15,7 +15,9 @@
         <li><a href="{{ route('home') }}"><i class="fas fa-home"></i>Inicio</a></li>
         <li><a href="#"><i class="fas fa-briefcase"></i>Trabajo &dtrif;</a>
             <ul class="dropdown">
+                @hasrole('Admin')
                 <li><a href="{{ route('admin.index') }}"><i class="fas fa-tachometer-alt"></i> Panel de administración</a></li>
+                @endhasrole
                 <li><a href="{{ route('applications.index') }}"><i class="fas fa-file-alt"></i> Listado de solicitudes</a></li>
                 <li><a href="{{ route('applications.create') }}"><i class="fas fa-search"></i> Crear una solicitud</a></li>
                 <li><a href="{{ route('clients.index') }}"><i class="fas fa-users"></i> Administrar Clientes</a></li>

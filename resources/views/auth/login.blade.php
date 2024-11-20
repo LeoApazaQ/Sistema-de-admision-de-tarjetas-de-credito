@@ -45,13 +45,14 @@
                     @if (Route::has('password.request'))
                         <span><a href="{{ route('password.request') }}">Olvido su contraseña?</a></span>
                     @endif
-                    <input type="submit" value="Login">
+                    <input type="submit" value="Ingresar">
                 </p>
             </form>
         </div>
     </body>
 
 
+    {{-- Login antiguo de laravel ui --}}
     {{-- 
 <div class="container">
     <div class="row justify-content-center">

@@ -17,10 +17,12 @@
                             </span>
 
                             <div class="float-right">
-                                <a href="{{ route('clients.create') }}" class="btn btn-primary btn-sm float-right"
-                                    data-placement="left">
-                                    {{ __('Crear nuevo cliente') }}
-                                </a>
+                                @can('Crear')
+                                    <a href="{{ route('clients.create') }}" class="btn btn-primary btn-sm float-right"
+                                        data-placement="left">
+                                        {{ __('Crear nuevo cliente') }}
+                                    </a>
+                                @endcan
                             </div>
                         </div>
                     </div>
@@ -66,17 +68,23 @@
 
                                             <td>
                                                 <form action="{{ route('clients.destroy', $client->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary mr-1"
-                                                        href="{{ route('clients.show', $client->id) }}"><i
-                                                            class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success mr-1"
-                                                        href="{{ route('clients.edit', $client->id) }}"><i
-                                                            class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    @can('Consultar', $client)
+                                                        <a class="btn btn-sm btn-primary mr-1"
+                                                            href="{{ route('clients.show', $client->id) }}"><i
+                                                                class="fa fa-fw fa-eye"></i> {{ __('Ver') }}</a>
+                                                    @endcan
+                                                    @can('Editar', $client)
+                                                        <a class="btn btn-sm btn-success mr-1"
+                                                            href="{{ route('clients.edit', $client->id) }}"><i
+                                                                class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                                    @endcan
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm mr-1"
-                                                        onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i
-                                                            class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    @can('Eliminar', $client)
+                                                        <button type="submit" class="btn btn-danger btn-sm mr-1"
+                                                            onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i
+                                                                class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
+                                                    @endcan
                                                 </form>
                                             </td>
                                         </tr>
