@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->unsignedBigInteger('status_id')->default(1);
             $table->foreign('status_id')->references('id')->on('statuses')->ondelete('cascade');
-            //clave foranea a clients
+            // Foreign key to clients table
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')->references('id')->on('clients')->ondelete('cascade');
             $table->timestamps();

@@ -41,7 +41,6 @@ class ApplicationController extends Controller
      */
     public function store(ApplicationRequest $request): RedirectResponse
     {
-        dd(Application::create($request->validated()));
         Application::create($request->validated());
 
         return Redirect::route('applications.index')
