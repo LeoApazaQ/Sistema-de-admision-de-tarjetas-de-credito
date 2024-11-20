@@ -15,12 +15,14 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    @yield('styles')
+
 </head>
 
 <body>
     <div id="app">
-
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>

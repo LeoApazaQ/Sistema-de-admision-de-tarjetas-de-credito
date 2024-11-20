@@ -1,6 +1,58 @@
 @extends('layouts.login')
 
+@section('styles')
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+@endsection
+
 @section('content')
+
+    <body>
+        <div class="main">
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+                <h1>Login de <span>Empleado</span></h1>
+                <div class="inset">
+                    <p>
+                        <label for="email">Correo electrónico</label>
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                            name="email" value="{{ old('email') }}" required autocomplete="email" autofocus
+                            placeholder="Direccion de Email">
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </p>
+                    <p>
+                        <label for="password">Contraseña</label>
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
+                            name="password" required autocomplete="current-password" placeholder="Contraseña">
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </p>
+                    <p>
+                        <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                        <label for="remember">Recuerdame</label>
+                    </p>
+                </div>
+                <p class="p-container">
+                    @if (Route::has('password.request'))
+                        <span><a href="{{ route('password.request') }}">Olvido su contraseña?</a></span>
+                    @endif
+                    <input type="submit" value="Login">
+                </p>
+            </form>
+        </div>
+    </body>
+
+
+    {{-- 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -70,4 +122,12 @@
         </div>
     </div>
 </div>
+--}}
+
+    <script type="application/javascript"> 
+        addEventListener("load", function() { 
+            setTimeout(hideURLbar, 0); },
+            false);
+            function hideURLbar(){ window.scrollTo(0,1); }
+    </script>
 @endsection
