@@ -53,7 +53,7 @@ Route::group(['prefix' => 'admin' ,'middleware' => ['role:Admin']], function () 
     Route::get('/home', [AdminController::class, 'index'])->name('admin.index');
     Route::resource('/roles', RoleController::class);
     Route::resource('/permisos', PermissionController::class);
-    Route::get('/usuarios', [UserController::class, 'index'])->name('admin.user');
+    Route::resource('/usuarios', UserController::class);
     Route::resource('/usuarios-roles', AssignRoleController::class);
     Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
     Route::post('register', [RegisterController::class, 'register']);

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -21,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        
+        return view('admin.user-create');
     }
 
     /**
@@ -29,7 +32,44 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //to do arreglar la validacion
+        // Validar los datos
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+            'nombres' => 'required|string|max:255',
+            'apellidos' => 'required|string|max:255',
+            'dni' => 'required|string|max:8|unique:employees,dni',
+            'fecha_nacimiento' => 'required|date',
+            'direccion' => 'required|string|max:255',
+            'telefono' => 'required|string|max:15',
+            'puesto' => 'required|string|max:255',
+        ]);
+
+        dd($validated);
+
+        // Crear el usuario
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        // Crear el empleado asociado al usuario
+        $employee = Employee::create([
+            'user_id' => $user->id,
+            'nombres' => $validated['nombres'],
+            'apellidos' => $validated['apellidos'],
+            'dni' => $validated['dni'],
+            'fecha_nacimiento' => $validated['fecha_nacimiento'],
+            'direccion' => $validated['direccion'],
+            'telefono' => $validated['telefono'],
+            'puesto' => $validated['puesto'],
+        ]);
+
+        return redirect()->route('usuarios.index')
+            ->with('success', 'Usuario creado exitosamente.');
     }
 
     /**
