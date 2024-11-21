@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -49,9 +50,7 @@ Route::group(['prefix' => 'solicitud', 'middleware' => ['role:Gerente|Empleado']
 
 //Rutas para el administrador
 Route::group(['prefix' => 'admin' ,'middleware' => ['role:Admin']], function () {
-    Route::get('/admin', function () { //redireccion a admin panel
-        return view('layouts.admin');
-    })->name('admin.index');
+    Route::get('/home', [AdminController::class, 'index'])->name('admin.index');
     Route::resource('/roles', RoleController::class);
     Route::resource('/permisos', PermissionController::class);
     Route::get('/usuarios', [UserController::class, 'index'])->name('admin.user');
