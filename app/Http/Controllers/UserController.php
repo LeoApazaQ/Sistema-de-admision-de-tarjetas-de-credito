@@ -47,8 +47,6 @@ class UserController extends Controller
             'puesto' => 'required|string|max:255',
         ]);
 
-        dd($validated);
-
         // Crear el usuario
         $user = User::create([
             'name' => $validated['name'],
