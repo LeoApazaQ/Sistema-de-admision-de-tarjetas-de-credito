@@ -17,10 +17,12 @@
                             </span>
 
                             <div class="float-right">
-                                <a href="{{ route('applications.create') }}" class="btn btn-primary btn-sm float-right"
-                                    data-placement="left">
-                                    {{ __('Nueva solicitud') }}
-                                </a>
+                                @can('Crear')
+                                    <a href="{{ route('applications.create') }}" class="btn btn-primary btn-sm float-right"
+                                        data-placement="left">
+                                        {{ __('Nueva solicitud') }}
+                                    </a>
+                                @endcan
                             </div>
                         </div>
                     </div>
@@ -52,20 +54,28 @@
                                             <td>{{ $application->client->nombres  }} {{ $application->client->apellidos }}</td>
 
                                             <td>
-                                                <form action="{{ route('applications.destroy', $application->id) }}"
-                                                    method="POST">
+                                                @can('Consultar', $application)
                                                     <a class="btn btn-sm btn-primary "
                                                         href="{{ route('applications.show', $application->id) }}"><i
                                                             class="fa fa-fw fa-eye"></i> {{ __('Ver') }}</a>
+                                                @endcan
+
+                                                @can('Editar', $application)
                                                     <a class="btn btn-sm btn-success"
                                                         href="{{ route('applications.edit', $application->id) }}"><i
                                                             class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"
-                                                        onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i
-                                                            class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
-                                                </form>
+                                                @endcan
+
+                                                @can('Eliminar', $application)
+                                                    <form action="{{ route('applications.destroy', $application->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm"
+                                                            onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i
+                                                                class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
+                                                    </form>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach
