@@ -32,22 +32,40 @@ class ClientController extends Controller
         return view('client.create', compact('client'));
     }
 
+    public function createWithApplication(): View
+    {
+        $client = new Client();
+
+        return view('client.createwithapplication', compact('client'));
+    }
+
     /**
      * creando un nuevo cliente
      */
     public function store(ClientRequest $request): RedirectResponse
     {
+        Client::create($request->validated());
+
+        return Redirect::route('clients.index')
+            ->with('success', 'Nuevo cliente creado con exito.');
+    }
+
+    /**
+     * creando un nuevo cliente con una solicitud
+     */
+    public function storeWithApplication(ClientRequest $request): RedirectResponse
+    {
+
         //al crear un cliente se crea una nueva solicitud
-        
         $newClient = Client::create($request->validated());
         //creando la solicitud con su fecha y el id del nuevo cliente
         Application::create([
-            'title' => 'Solicitud de crédito - ' . date('Y-m-d-H-i'),
+            'title' => $request->title,
             'client_id' => $newClient->id
         ]);
 
         return Redirect::route('clients.index')
-            ->with('success', 'Nuevo cliente creado con exito.');
+            ->with('success', 'Nuevo cliente creado con exito y solicitud creada.');
     }
 
     /**

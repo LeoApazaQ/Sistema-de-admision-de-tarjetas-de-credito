@@ -63,6 +63,12 @@
             {!! $errors->first('ocupacion', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
 
+        <div class="form-group mb-2 mb20">
+            <label for="title" class="form-label">{{ __('Solicitud') }}</label>
+            <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title', $application?->title ?? 'Solicitud de credito - ' . date('Y-m-d-h-i')) }}" id="title" placeholder="Title" readonly>
+            {!! $errors->first('title', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+        </div>
+
     </div>
     <div class="col-md-12 mt20 mt-2">
         <button type="submit" class="btn btn-primary">{{ __('Enviar') }}</button>

@@ -33,6 +33,8 @@ Route::post('password/reset', [ResetPasswordController::class, 'reset']);
 //Rutas para el empleado
 Route::group(['prefix' => 'empleado', 'middleware' => ['role:Empleado']], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/clients/application', [ClientController::class, 'createWithApplication'])->name('clients.createwithapplication');
+    Route::post('/clients/application', [ClientController::class, 'storeWithApplication'])->name('clients.storewithapplication');
     Route::resource('/clients', ClientController::class)->only(['index', 'show', 'create', 'store']);
 });
 
