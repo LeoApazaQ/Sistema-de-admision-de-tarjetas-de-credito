@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Admision de tarjetas de credito</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -19,7 +19,7 @@
 
 <body>
     <div id="app">
-    @include('partials.navbar')
+    @include('partials.menu')
         <main class="py-4">
             @yield('content')
         </main>

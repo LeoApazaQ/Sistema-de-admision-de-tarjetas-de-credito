@@ -84,8 +84,8 @@ document.getElementById("dni").addEventListener("input", function() {
                 let apellidos = data.data.apellido_paterno + ' ' + data.data.apellido_materno || '';  // Concatenar apellidos
 
                 // Asignar los valores a los campos del formulario
-                document.getElementById("nombres").value = nombres;
-                document.getElementById("apellidos").value = apellidos;
+                document.getElementById("names").value = nombres;
+                document.getElementById("lastnames").value = apellidos;
 
                 console.log('Datos obtenidos:', data.data);  // Ver los datos en consola
             } else {

@@ -4,16 +4,17 @@
 
 @section('content')
 
-    <div class="container">
-        <div class="container">
-            <h5>Bienvenido Usuario, {{ auth()->user()->name }}</h5>
-        </div>
+    <div class="container" style="">
+        
         <div class="d-flex">
 
             <!-- Content -->
             <div class="content">
                 <div class="container-fluid">
                     <h2 class="mb-4">Bienvenido al Área de Crédito</h2>
+                    <div class="container">
+                        <h5>Usuario, {{ auth()->user()->name ?? 'Desconocido' }}</h5>
+                    </div>
                     <div class="row">
                         <!-- Estadísticas -->
                         <div class="col-md-4">
