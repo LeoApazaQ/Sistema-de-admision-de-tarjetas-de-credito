@@ -88,8 +88,4 @@ class ApplicationController extends Controller
             ->with('success', 'Application deleted successfully');
     }
 
-    public function api()
-    {
-        return view('application.apitest');
-    }
 }

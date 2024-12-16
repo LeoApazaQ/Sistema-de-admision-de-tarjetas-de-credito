@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ReportapplicationsController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 
@@ -40,8 +41,8 @@ Route::group(['prefix' => 'empleado', 'middleware' => ['role:Empleado']], functi
 
 //Rutas para el gerente
 Route::group(['prefix' => 'gerente' ,'middleware' => ['role:Gerente']], function () {
-    Route::resource('/applications', ApplicationController::class)->only(['edit', 'update', 'destroy']);
-    Route::get('/applications/api', [ApplicationController::class, 'api'])->name('applications.api');
+    Route::resource('/applications', ApplicationController::class)->only(['edit', 'update', 'destroy']);/* 
+    Route::get('/exportapplications',[ReportapplicationsController::class,'export'])->name('export.applications'); */
     Route::resource('/clients', ClientController::class)->only(['edit', 'update', 'destroy']);
 });
 

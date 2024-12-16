@@ -23,6 +23,10 @@
                                         {{ __('Nueva solicitud') }}
                                     </a>
                                 @endcan
+                                   {{--  <a href="{{ route('export.applications') }}" class="btn btn-primary btn-sm float-right"
+                                        data-placement="left">
+                                        {{ __('Exportar Solicitudes a Excel') }}
+                                    </a> --}}
                             </div>
                         </div>
                     </div>
