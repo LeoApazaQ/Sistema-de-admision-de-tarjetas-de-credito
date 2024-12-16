@@ -43,6 +43,13 @@ Route::group(['prefix' => 'empleado', 'middleware' => ['role:Empleado']], functi
 Route::group(['prefix' => 'gerente' ,'middleware' => ['role:Gerente']], function () {
     Route::resource('/applications', ApplicationController::class)->only(['edit', 'update', 'destroy']);/* 
     Route::get('/exportapplications',[ReportapplicationsController::class,'export'])->name('export.applications'); */
+    //rutas de las solicitudes
+    Route::get('/applications/pending', [ApplicationController::class, 'pendingApplications'])->name('applications.pending');
+    Route::get('/applications/rejected', [ApplicationController::class, 'rejectedApplications'])->name('applications.rejected');
+    Route::get('/applications/approved', [ApplicationController::class, 'approvedApplications'])->name('applications.approved');
+    //cambio de estado de la solicitud
+    Route::get('/applications/{id}/edit-status', [ApplicationController::class, 'editStatus'])->name('applications.edit-status');
+    Route::put('/applications/{id}/update-status', [ApplicationController::class, 'updateStatus'])->name('applications.update-status');
     Route::resource('/clients', ClientController::class)->only(['edit', 'update', 'destroy']);
 });
 

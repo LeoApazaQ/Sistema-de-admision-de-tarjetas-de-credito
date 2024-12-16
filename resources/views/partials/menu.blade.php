@@ -37,7 +37,7 @@
 
                      <ul class="dropdown__menu">
                         <li>
-                           <a href="#" class="dropdown__link">
+                           <a href="{{ route('applications.create') }}" class="dropdown__link">
                               <i class="ri-pie-chart-line"></i> Crear Solicitud
                            </a>                          
                         </li>
@@ -46,6 +46,17 @@
                            <li>
                               <a href="{{ route('applications.index') }}" class="dropdown__link">
                                  <i class="ri-arrow-up-down-line"></i> Listado de solicitudes
+                              </a>
+                              
+                              @role('Gerente')
+
+                              <a href="{{ route('applications.pending') }}" class="dropdown__link">
+                                 <i class="ri-arrow-up-down-line"></i> Ver Solicitudes pendientes
+                              </a>
+
+                              @endrole
+                              <a href="{{ route('applications.approved') }}" class="dropdown__link">
+                                 <i class="ri-arrow-up-down-line"></i> Ver Solicitudes aprobadas
                               </a>
                            </li>
                         @endrole

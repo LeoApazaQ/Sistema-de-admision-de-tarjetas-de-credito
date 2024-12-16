@@ -24,6 +24,44 @@ class ApplicationController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * $applications->perPage());
     }
 
+    //Solicitudes por estado
+
+    public function approvedApplications() {
+        $applications = Application::where('status_id', 2)->get();
+        return view('application.approved', compact('applications'));
+    }    
+
+    public function pendingApplications() {
+        $applications = Application::where('status_id', 1)->get();
+        return view('application.pending', compact('applications'));
+    }
+
+    public function rejectedApplications() {
+        $applications = Application::where('status_id', 3)->get();
+        return view('application.rejected', compact('applications'));
+    }
+    
+
+    //Cambiar el estado de la solicitud
+
+    public function editStatus($id) {
+        $application = Application::findOrFail($id);
+        $statuses = Status::all(); // Carga todos los estados para la selección
+        return view('application.change-status', compact('application', 'statuses'));
+    }
+    
+    public function updateStatus(Request $request, $id) {
+        $request->validate([
+            'status_id' => 'required|exists:statuses,id',
+        ]);
+    
+        $application = Application::findOrFail($id);
+        $application->status_id = $request->input('status_id');
+        $application->save();
+    
+        return redirect()->route('applications.pending')->with('status', 'Estado de la solicitud actualizado con éxito.');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
